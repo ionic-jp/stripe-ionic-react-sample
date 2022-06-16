@@ -60,7 +60,7 @@ const Tab2: React.FC = () => {
 
     }
 
-    if (1 === 1) {
+    if (true) {
       // 成功した場合
       localStorage.clear();
     } else {
