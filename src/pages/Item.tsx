@@ -52,15 +52,9 @@ const Item: React.FC<ItemPageProps> = ({ match }) => {
           <h1>{item?.title}</h1>
           <p>¥{item?.price.toLocaleString()}（税込）</p>
           <p>{item?.description}</p>
-          {!isCart ? (
-            <IonButton expand="block" fill="outline" onClick={() => addItemToCart(item?.id, !isCart)}>
-              カートに入れる
-            </IonButton>
-          ) : (
-            <IonButton expand="block" fill="outline" onClick={() => addItemToCart(item?.id, !isCart)}>
-              カートから削除
-            </IonButton>
-          )}
+          <IonButton expand="block" fill={isCart ? 'outline' : undefined} onClick={() => addItemToCart(item?.id, !isCart)}>
+            {!isCart ? 'カートに入れる' : 'カートから削除'}
+          </IonButton>
         </div>
 
         <IonToast color="primary" isOpen={showToast} onDidDismiss={() => setShowToast(false)} message={item?.title + 'を変更しました'} duration={2000} />
