@@ -1,6 +1,6 @@
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonImg, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Tab1.css';
-import { Items } from '../Items';
+import { Items } from '../constant';
 
 const Tab1: React.FC = () => {
   return (

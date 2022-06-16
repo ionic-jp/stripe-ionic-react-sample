@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 import './Item.css';
 import { RouteComponentProps } from 'react-router';
-import { Items } from '../Items';
+import { Items } from '../constant';
 import { useState } from 'react';
 
 interface ItemPageProps

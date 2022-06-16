@@ -18,7 +18,7 @@ import {
   useIonViewWillEnter,
 } from '@ionic/react';
 import './Tab2.css';
-import { Items } from '../Items';
+import { Items } from '../constant';
 import { useState } from 'react';
 import { Capacitor } from '@capacitor/core';
 
