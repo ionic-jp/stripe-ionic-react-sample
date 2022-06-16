@@ -5,7 +5,7 @@ export type IItem = {
   price: number;
   image: string;
   description: string;
-}
+};
 
 export const Items: IItem[] = [
   {
@@ -26,5 +26,5 @@ export const Items: IItem[] = [
     image: '/assets/images/hamburger.jpg',
     description: `店主おすすめの部位をミンチにしてハンバーグにしました。
 真空パックにしていますので冷蔵庫で１週間程、日持ちいたします。`,
-  }
-]
+  },
+];

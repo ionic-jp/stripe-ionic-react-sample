@@ -1,17 +1,6 @@
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader, IonCardSubtitle, IonCardTitle,
-  IonContent,
-  IonHeader, IonImg,
-  IonList,
-  IonPage,
-  IonTitle,
-  IonToolbar
-} from '@ionic/react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonImg, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Tab1.css';
 import { Items } from '../Items';
-
 
 const Tab1: React.FC = () => {
   return (
@@ -28,9 +17,9 @@ const Tab1: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonList>
-          {Items.map((d, index) =>
+          {Items.map((d, index) => (
             <IonCard button={true} routerLink={`/tab1/item/${d.id}`} key={index}>
-              <div className='card-image'>
+              <div className="card-image">
                 <IonImg src={d.image} />
               </div>
               <IonCardHeader>
@@ -41,7 +30,7 @@ const Tab1: React.FC = () => {
                 <p>¥{d.price.toLocaleString()}（税込）</p>
               </IonCardContent>
             </IonCard>
-          )}
+          ))}
         </IonList>
       </IonContent>
     </IonPage>
