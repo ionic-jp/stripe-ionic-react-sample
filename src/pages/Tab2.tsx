@@ -20,6 +20,7 @@ import {
 import './Tab2.css';
 import { Items } from '../Items';
 import { useState } from 'react';
+import { Capacitor } from '@capacitor/core';
 
 type IChecked = {
   val: number;
@@ -52,6 +53,20 @@ const Tab2: React.FC = () => {
     localStorage.setItem(String(id), String(val));
     setRadioChecked(getRadioChecked());
   };
+  const submitPayment = () => {
+    if (!Capacitor.isNativePlatform) {
+      // for Web
+    } else {
+
+    }
+
+    if (1 === 1) {
+      // 成功した場合
+      localStorage.clear();
+    } else {
+      // 失敗した場合
+    }
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -95,7 +110,7 @@ const Tab2: React.FC = () => {
             {radioChecked.filter((d) => d.isChecked).length}点 合計 ¥{getSumPrice(radioChecked)}円（税込）
           </IonText>
           <IonButtons slot="end">
-            <IonButton fill="outline">決済する</IonButton>
+            <IonButton fill="outline" onClick={() => submitPayment()}>決済する</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonFooter>
