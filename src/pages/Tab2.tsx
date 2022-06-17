@@ -64,16 +64,82 @@ const Tab2: React.FC = () => {
 
   const { stripe } = useCapacitorStripe();
   const submitPayment = async () => {
-    if (!Capacitor.isNativePlatform) {
-      // for Web
-    } else {
-    }
+    const api = process.env.REACT_APP_API_URL || 'https://j3x0ln9gj7.execute-api.ap-northeast-1.amazonaws.com/dev/';
+    try {
+      /**
+       * webで、Checkout Session APIが用意できている場合のみ、Checkoutを利用する
+       */
+      if (!Capacitor.isNativePlatform() && process.env.REACT_APP_API_URL) {
+        /**
+         * Checkout Sessionを作成する
+         */
+        const { url } = await fetch(`${api}checkout-session`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            items: radioChecked
+              .filter((checked) => checked.isChecked)
+              .map((checked) => {
+                const item = Items.find((item) => item.id === checked.val);
+                if (!item) return null;
+                return {
+                  amount: item.price,
+                  currency: 'jpy',
+                  name: item.title,
+                };
+              })
+              .filter(Boolean),
+          }),
+        }).then(async (res) => {
+          /**
+           * APIがエラーを出した場合は、アラートでメッセージを出す
+           */
+          const r = await res.json();
+          if (res.ok) return r.url;
+          console.log(r);
+          window.alert(r.message);
+        });
+        /**
+         * Checkout Sessionが作成できていたら、新しいタブを開く
+         */
+        if (url) window.open(url);
+      } else {
+        /**
+         * Payment Intentを作成する
+         */
+        const { customer, paymentIntent, ephemeralKey } = await fetch(`${api}without-customer`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            amount,
+            currency: 'jpy',
+          }),
+        }).then((res) => res.json());
 
-    if (true) {
+        /**
+         * Payment Sheetを作成
+         */
+        await stripe.createPaymentSheet({
+          paymentIntentClientSecret: paymentIntent,
+          customerId: customer,
+          customerEphemeralKeySecret: ephemeralKey,
+          merchantDisplayName: 'ionic-workshop',
+        });
+
+        /**
+         * Payment Sheetを表示
+         */
+        await stripe.presentPaymentSheet();
+      }
       // 成功した場合
       localStorage.clear();
-    } else {
+    } catch (e) {
       // 失敗した場合
+      console.log(e);
     }
   };
   return (
