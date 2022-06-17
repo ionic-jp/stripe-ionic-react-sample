@@ -1,15 +1,4 @@
-import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonImg,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonBackButton,
-  IonButton,
-  IonToast,
-} from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonImg, IonPage, IonTitle, IonToolbar, IonBackButton, IonButton, IonToast } from '@ionic/react';
 import './Item.css';
 import { RouteComponentProps } from 'react-router';
 import { Items } from '../constant';

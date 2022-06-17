@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, IonText } from '@ionic/react';
 import './Tab3.css';
-import { Terms } from '../constant'
+import { Terms } from '../constant';
 
 const Tab3: React.FC = () => {
   return (
@@ -17,13 +17,12 @@ const Tab3: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonList className="ion-padding-end ion-padding-bottom">
-          {
-            Terms.map(item => (
-              <IonItem lines="none">
-                <IonLabel position="stacked">{item.label}</IonLabel>
-                <IonText>{item.value}</IonText>
-              </IonItem>))
-          }
+          {Terms.map((item) => (
+            <IonItem lines="none">
+              <IonLabel position="stacked">{item.label}</IonLabel>
+              <IonText>{item.value}</IonText>
+            </IonItem>
+          ))}
         </IonList>
       </IonContent>
     </IonPage>

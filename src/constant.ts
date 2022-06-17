@@ -1,5 +1,3 @@
-import {strict} from 'assert';
-
 type IItem = {
   id: number;
   title: string;
@@ -34,7 +32,7 @@ export const Items: IItem[] = [
 type ITerms = {
   label: string;
   value: string;
-}
+};
 
 export const Terms: ITerms[] = [
   {
@@ -81,4 +79,4 @@ export const Terms: ITerms[] = [
     label: '返品・交換・キャンセルについて',
     value: '商品お渡し後の返品・交換・キャンセルには、基本的に対応しておりません。',
   },
-]
+];
