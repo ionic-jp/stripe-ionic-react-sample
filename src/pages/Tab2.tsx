@@ -69,7 +69,7 @@ const Tab2: React.FC = () => {
       /**
        * webで、Checkout Session APIが用意できている場合のみ、Checkoutを利用する
        */
-      if (false && !Capacitor.isNativePlatform() && process.env.REACT_APP_API_URL) {
+      if (!Capacitor.isNativePlatform() && process.env.REACT_APP_API_URL) {
         /**
          * Checkout Sessionを作成する
          */
