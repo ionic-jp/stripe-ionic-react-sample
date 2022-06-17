@@ -69,7 +69,7 @@ const Tab2: React.FC = () => {
       /**
        * webで、Checkout Session APIが用意できている場合のみ、Checkoutを利用する
        */
-      if (!Capacitor.isNativePlatform() && process.env.REACT_APP_API_URL) {
+      if (false && !Capacitor.isNativePlatform() && process.env.REACT_APP_API_URL) {
         /**
          * Checkout Sessionを作成する
          */
@@ -97,7 +97,7 @@ const Tab2: React.FC = () => {
            * APIがエラーを出した場合は、アラートでメッセージを出す
            */
           const r = await res.json();
-          if (res.ok) return r.url;
+          if (res.ok) return r;
           console.log(r);
           window.alert(r.message);
         });
@@ -109,7 +109,7 @@ const Tab2: React.FC = () => {
         /**
          * Payment Intentを作成する
          */
-        const { customer, paymentIntent, ephemeralKey } = await fetch(`${api}without-customer`, {
+        const { customer, paymentIntent, ephemeralKey } = await fetch(`${api}intent`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -118,7 +118,15 @@ const Tab2: React.FC = () => {
             amount,
             currency: 'jpy',
           }),
-        }).then((res) => res.json());
+        }).then(async (res) => {
+          /**
+           * APIがエラーを出した場合は、アラートでメッセージを出す
+           */
+          const r = await res.json();
+          if (res.ok) return r;
+          console.log(r);
+          window.alert(r.message);
+        });
 
         /**
          * Payment Sheetを作成
