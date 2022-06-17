@@ -56,6 +56,34 @@ app.post('/intent', async (req, res) => {
     }  
 })
 
+app.post('/subscription', async (req, res) => {
+    const customerId = await (async () => {
+      if (req.body.customer_id)
+        return req.body.customer_id;
+      const customer = await stripe.customers.create();
+      return customer.id;
+    })();
+    const ephemeralKey = await stripe.ephemeralKeys.create(
+      { customer: customerId },
+      { apiVersion: '2020-08-27' },
+    );
+    const subscription = await stripe.subscriptions.create({
+        items: [{
+            price: req.body.price_id || process.env.SUBSCRIPTION_PRICE_ID,
+            quantity: 1,
+        }],
+        customer: customerId,
+        payment_behavior: 'default_incomplete',
+        expand: ['latest_invoice.payment_intent'],
+    })
+    res.status(200).json({
+        subscriptionId: subscription.id,
+        ephemeralKey: ephemeralKey.secret,
+        customer: customerId,
+        paymentIntent: subscription.latest_invoice.payment_intent.client_secret,
+    })
+})
+
 app.post('/checkout-session', async (req, res) => {
     try{
         /**
