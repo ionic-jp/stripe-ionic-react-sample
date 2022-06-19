@@ -18,7 +18,7 @@ const Tab1: React.FC = () => {
         </IonHeader>
         <IonList>
           {Items.map((d, index) => (
-            <IonCard button={true} key={index}>
+            <IonCard button={true} routerLink={`/tab1/item/${d.id}`} key={index}>
               <div className="card-image">
                 <IonImg src={d.image} />
               </div>
